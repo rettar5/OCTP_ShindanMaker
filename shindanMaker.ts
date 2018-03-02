@@ -41,7 +41,7 @@ export class ShindanMaker {
   static isValid(tweetData: OdnTweetData): boolean {
     const url = tweetData.entities.urls && 0 < tweetData.entities.urls.length ? tweetData.entities.urls[0].expandedUrl : "";
     let result: boolean = true;
-    result = result ? tweetData.isReplyToMe() : false;
+    result = result ? false === tweetData.isRetweet && tweetData.isReplyToMe() : false;
     // URLに診断メーカのURLが含まれている
     result = result ? (url.match(/[htps:\/]*shindanmaker\.com\/[0-9]+/gi) ? true : false) : false;
     // コマンドがURLの形式
